@@ -83,7 +83,7 @@ input:checked + .slider:before {
 
 /* ---------------------------SWITCH END--------------------------- */
 
-.x {
+.calculator-body {
   width: 375px;
   height: 812px;
 }
