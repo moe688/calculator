@@ -17,44 +17,8 @@
   margin: 0px;
 }
 
-.flex {
-  display: flex;
-  flex-direction: row;
-}
-
-.status-bar {
-  justify-content: space-between;
-  width: 375px;
-  height: 44px;
-}
-
-.time {
-  padding-top: 17px;
-  padding-left: 19px;
-  font-size: 15px;
-  line-height: 20px;
-  width: 54px;
-  height: 21px;
-}
-
-.notch {
-  width: 164px;
-  height: 31px;
-}
-.icons {
-  justify-content: space-evenly;
-  padding-top: 22px;
-  padding-right: 19px;
-  width: 66px;
-  height: 11px;
-}
-
-.theme {
-  padding-left: 140px;
-  padding-top: 20px;
-}
-
-/* The switch - the box around the slider */
+/* ---------------------------SWITCH START--------------------------- */
+/* The switch -*/
 .switch {
   position: relative;
   display: inline-block;
@@ -115,4 +79,104 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+/* ---------------------------SWITCH END--------------------------- */
+
+.x {
+  border-style: solid;
+  border-color: white;
+  width: 375px;
+  height: 812px;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.status-bar {
+  justify-content: space-between;
+  width: 375px;
+  height: 44px;
+}
+
+.time {
+  padding-top: 17px;
+  padding-left: 19px;
+  font-size: 15px;
+  line-height: 20px;
+  width: 54px;
+  height: 21px;
+}
+
+.notch {
+  width: 164px;
+  height: 31px;
+}
+.icons {
+  justify-content: space-evenly;
+  padding-top: 22px;
+  padding-right: 19px;
+  width: 66px;
+  height: 11px;
+}
+
+.theme {
+  padding-left: 140px;
+  padding-top: 20px;
+}
+
+.calculator {
+  align-items: flex-end;
+  padding-top: 50px;
+  gap: 16px;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+.equation {
+  font-family: "Work Sans";
+  font-size: 40px;
+  color: #4e505f;
+  font-weight: 200;
+}
+
+.result {
+  font-family: "Work Sans";
+  font-size: 96px;
+  color: white;
+  font-weight: 200;
+}
+
+.key {
+  width: 72px;
+  height: 72px;
+  border-radius: 24px;
+  border: none;
+}
+
+.low-emphasis {
+  background-color: #2e2f38;
+}
+
+.medium-emphasis {
+  background-color: #4e505f;
+}
+
+.high-emphasis {
+  background-color: #4b5efc;
+}
+
+.key-row {
+  width: 100%;
+  justify-content: space-around;
+}
+
+.buttons {
+  width: 100%;
+  gap: 16px;
 }

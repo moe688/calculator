@@ -4,23 +4,65 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
     <title>Document</title>
   </head>
-  <body>
-    <div class="status-bar flex">
+  <body class="x">
+    <div class="status-bar flex flex-row">
       <p class="time">9:41</p>
       <img class="notch" src="assets/Notch.svg" />
-      <div class="icons flex">
+      <div class="icons flex flex-row">
         <img src="assets/Mobile-signal.svg" alt="" />
         <img src="assets/Wifi.svg" alt="" />
         <img src="assets/Battery.svg" alt="" />
       </div>
     </div>
-    <div class="theme flex">
+    <div class="theme flex flex-row">
       <label class="switch">
         <input type="checkbox" />
         <span class="slider round"></span>
       </label>
+    </div>
+    <div class="calculator flex flex-column">
+      <h2 class="equation">6,291÷5</h2>
+      <h1 class="result">1,258.2</h1>
+      <div class="buttons flex flex-column">
+        <div class="flex key-row">
+          <button class="key medium-emphasis"></button>
+          <button class="key medium-emphasis"></button>
+          <button class="key medium-emphasis"></button>
+          <button class="key high-emphasis"></button>
+        </div>
+        <div class="flex key-row">
+          <button class="key low-emphasis"></button>
+          <button class="key low-emphasis"></button>
+          <button class="key low-emphasis"></button>
+          <button class="key high-emphasis"></button>
+        </div>
+        <div class="flex key-row">
+          <button class="key low-emphasis"></button>
+          <button class="key low-emphasis"></button>
+          <button class="key low-emphasis"></button>
+          <button class="key high-emphasis"></button>
+        </div>
+        <div class="flex key-row">
+          <button class="key low-emphasis"></button>
+          <button class="key low-emphasis"></button>
+          <button class="key low-emphasis"></button>
+          <button class="key high-emphasis"></button>
+        </div>
+        <div class="flex key-row">
+          <button class="key low-emphasis"></button>
+          <button class="key low-emphasis"></button>
+          <button class="key low-emphasis"></button>
+          <button class="key high-emphasis"></button>
+        </div>
+      </div>
     </div>
   </body>
 </html>
