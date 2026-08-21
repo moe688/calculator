@@ -41,7 +41,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: #2e2f38;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
@@ -53,7 +53,7 @@
   width: 26px;
   left: 4px;
   bottom: 4px;
-  background-color: white;
+  background-color: #4e505f;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
@@ -84,8 +84,6 @@ input:checked + .slider:before {
 /* ---------------------------SWITCH END--------------------------- */
 
 .x {
-  border-style: solid;
-  border-color: white;
   width: 375px;
   height: 812px;
 }
@@ -181,4 +179,17 @@ input:checked + .slider:before {
 .buttons {
   width: 100%;
   gap: 16px;
+}
+
+.home-indicator {
+  justify-content: center;
+  align-items: end;
+  padding-top: 35px;
+}
+
+.home-indicator div {
+  height: 5px;
+  width: 134px;
+  background-color: white;
+  border-radius: 100px;
 }
