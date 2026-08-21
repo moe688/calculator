@@ -1,20 +1,15 @@
 * {
-  font-family:
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    "Open Sans",
-    "Helvetica Neue",
-    sans-serif;
+  font-family: "Work Sans", sans-serif;
   color: white;
-  background-color: #17171c;
   padding: 0px;
   margin: 0px;
+}
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100dvh;
 }
 
 /* ---------------------------SWITCH START--------------------------- */
@@ -68,7 +63,7 @@ input:focus + .slider {
 
 input:checked + .slider:before {
   -webkit-transform: translateX(40px);
-  -ms-transform: translateX(40x);
+  -ms-transform: translateX(40px);
   transform: translateX(40px);
 }
 
@@ -83,9 +78,11 @@ input:checked + .slider:before {
 
 /* ---------------------------SWITCH END--------------------------- */
 
-.calculator-body {
+.calculator-case {
   width: 375px;
   height: 812px;
+  background-color: #17171c;
+  border-radius: 24px;
 }
 
 .flex {
@@ -137,14 +134,12 @@ input:checked + .slider:before {
 }
 
 .equation {
-  font-family: "Work Sans";
   font-size: 40px;
   color: #4e505f;
   font-weight: 200;
 }
 
 .result {
-  font-family: "Work Sans";
   font-size: 96px;
   color: white;
   font-weight: 200;
