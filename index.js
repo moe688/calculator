@@ -3,6 +3,8 @@ console.log("The file is successfully connected");
 const buttonList = document.querySelectorAll(".key");
 console.dir(buttonList);
 
+const screen = document.querySelector(".result");
+
 let calculatorValue = "0";
 
 const calculatorClickHandler = (evt) => {
@@ -12,7 +14,7 @@ const calculatorClickHandler = (evt) => {
   if (!shouldSkip) {
     calculatorValue += evt.target.innerText;
   }
-  document.querySelector(".result").innerHTML = calculatorValue;
+  screen.innerHTML = calculatorValue;
 
   console.log({ calculatorValue });
 };
