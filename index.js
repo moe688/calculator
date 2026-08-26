@@ -12,6 +12,7 @@ const calculatorClickHandler = (evt) => {
   if (!shouldSkip) {
     calculatorValue += evt.target.innerText;
   }
+  document.querySelector(".result").innerHTML = calculatorValue;
 
   console.log({ calculatorValue });
 };
