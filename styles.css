@@ -139,7 +139,7 @@ input:checked + .slider:before {
   font-weight: 200;
 }
 
-.result {
+.results {
   font-size: 96px;
   color: white;
   font-weight: 200;
