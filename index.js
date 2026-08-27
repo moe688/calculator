@@ -4,6 +4,25 @@ console.dir(buttonList);
 const screen = document.querySelector(".equation");
 const results = document.querySelector(".results");
 
+// const screenDisplay = () => {
+//   screen.innerHTML =
+//     operator === ""
+//       ? calculatorValue
+//       : operator != ""
+//         ? calculatorValue + operator
+//         : calculatorValue + operator + calculatorValueTwo;
+// };
+
+const screenDisplay = () => {
+  if (operator === "" && calculatorValueTwo === "") {
+    screen.innerHTML = calculatorValue;
+  } else if (operator != "" && calculatorValueTwo === "") {
+    screen.innerHTML = calculatorValue + operator;
+  } else if (calculatorValueTwo != "" && operator != "") {
+    screen.innerHTML = calculatorValue + operator + calculatorValueTwo;
+  }
+};
+
 let calculatorValue = "";
 let operator = "";
 let calculatorValueTwo = "";
@@ -24,12 +43,7 @@ const calculatorClickHandler = (evt) => {
       calculatorValueTwo += evt.target.innerText;
     }
   }
-  screen.innerHTML =
-    operator === ""
-      ? calculatorValue
-      : operator != ""
-        ? calculatorValue + operator
-        : calculatorValue + operator + calculatorValueTwo;
+  screenDisplay();
   console.log({ calculatorValue, operator, calculatorValueTwo });
 };
 
@@ -37,6 +51,7 @@ const operatorClickHandler = (evt) => {
   if (calculatorValueTwo === "") {
     operator = evt.target.innerText;
   }
+  screenDisplay();
   console.log({ calculatorValue, operator, calculatorValueTwo });
 };
 
@@ -71,16 +86,32 @@ const clearHandler = (evt) => {
   calculatorValueTwo = "";
 };
 
+const backspaceHandler = (evt) => {
+  if (calculatorValueTwo !== "") {
+    calculatorValueTwo = calculatorValueTwo.slice(0, -1);
+  } else if (operator !== "") {
+    operator = operator.slice(0, -1);
+  } else if (calculatorValue !== "") {
+    calculatorValue = calculatorValue.slice(0, -1);
+  }
+  console.log({ calculatorValue, operator, calculatorValueTwo });
+  screenDisplay();
+};
+
 for (const element of buttonList) {
   const hasNumber = element.className.includes("number");
   const hasOperator = element.className.includes("math");
   const equal = element.className.includes("equals");
   const clear = element.className.includes("clear");
+  const backspace = element.className.includes("backspace");
   if (hasNumber) element.addEventListener("click", calculatorClickHandler);
   if (hasOperator) element.addEventListener("click", operatorClickHandler);
   if (equal) element.addEventListener("click", equalsClickHandler);
   if (clear) element.addEventListener("click", clearHandler);
-
+  if (backspace) {
+    console.log("backspace");
+    element.addEventListener("click", backspaceHandler);
+  }
   // if (clear) {
   //   console.log("clear");
   //   element.addEventListener("click", clearHandler);
