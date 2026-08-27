@@ -1,5 +1,3 @@
-console.log("The file is successfully connected");
-
 const buttonList = document.querySelectorAll(".key");
 console.dir(buttonList);
 
@@ -26,7 +24,12 @@ const calculatorClickHandler = (evt) => {
       calculatorValueTwo += evt.target.innerText;
     }
   }
-  screen.innerHTML = operator === "" ? calculatorValue : calculatorValueTwo;
+  screen.innerHTML =
+    operator === ""
+      ? calculatorValue
+      : operator != ""
+        ? calculatorValue + operator
+        : calculatorValue + operator + calculatorValueTwo;
   console.log({ calculatorValue, operator, calculatorValueTwo });
 };
 
@@ -40,19 +43,46 @@ const operatorClickHandler = (evt) => {
 const equalsClickHandler = (evt) => {
   const num1 = Number(calculatorValue);
   const num2 = Number(calculatorValueTwo);
-  let result = "";
+  const result = solver;
 
-  if (operator === "+") {
-    result = num1 + num2;
+  results.innerHTML = solver(operator, num1, num2);
+};
+
+const solver = (operator, num1, num2) => {
+  switch (operator) {
+    case "+":
+      return num1 + num2;
+    case "-":
+      return num1 - num2;
+    case "x":
+      return num1 * num2;
+    case "/":
+      return num1 / num2;
+    default:
+      return "";
   }
-  results.innerHTML = result;
+};
+
+const clearHandler = (evt) => {
+  screen.innerHTML = "0";
+  results.innerHTML = "0";
+  calculatorValue = "";
+  operator = "";
+  calculatorValueTwo = "";
 };
 
 for (const element of buttonList) {
   const hasNumber = element.className.includes("number");
   const hasOperator = element.className.includes("math");
   const equal = element.className.includes("equals");
+  const clear = element.className.includes("clear");
   if (hasNumber) element.addEventListener("click", calculatorClickHandler);
   if (hasOperator) element.addEventListener("click", operatorClickHandler);
   if (equal) element.addEventListener("click", equalsClickHandler);
+  if (clear) element.addEventListener("click", clearHandler);
+
+  // if (clear) {
+  //   console.log("clear");
+  //   element.addEventListener("click", clearHandler);
+  // }
 }
