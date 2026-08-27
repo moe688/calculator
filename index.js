@@ -1,17 +1,11 @@
 const buttonList = document.querySelectorAll(".key");
 console.dir(buttonList);
 
+const k = document.getElementById("calculator");
+console.dir(k);
+
 const screen = document.querySelector(".equation");
 const results = document.querySelector(".results");
-
-// const screenDisplay = () => {
-//   screen.innerHTML =
-//     operator === ""
-//       ? calculatorValue
-//       : operator != ""
-//         ? calculatorValue + operator
-//         : calculatorValue + operator + calculatorValueTwo;
-// };
 
 const screenDisplay = () => {
   if (operator === "" && calculatorValueTwo === "") {
@@ -27,35 +21,35 @@ let calculatorValue = "";
 let operator = "";
 let calculatorValueTwo = "";
 
-const calculatorClickHandler = (evt) => {
+const calculatorClickHandler = (event) => {
   if (operator === "") {
     const alreadyHasADot = calculatorValue.includes(".");
-    const isDot = evt.target.innerText.includes(".");
+    const isDot = event.target.innerText.includes(".");
     const shouldSkip = alreadyHasADot && isDot;
     if (!shouldSkip) {
-      calculatorValue += evt.target.innerText;
+      calculatorValue += event.target.innerText;
     }
   } else {
     const alreadyHasADot = calculatorValueTwo.includes(".");
-    const isDot = evt.target.innerText.includes(".");
+    const isDot = event.target.innerText.includes(".");
     const shouldSkip = alreadyHasADot && isDot;
     if (!shouldSkip) {
-      calculatorValueTwo += evt.target.innerText;
+      calculatorValueTwo += event.target.innerText;
     }
   }
   screenDisplay();
   console.log({ calculatorValue, operator, calculatorValueTwo });
 };
 
-const operatorClickHandler = (evt) => {
+const operatorClickHandler = (event) => {
   if (calculatorValueTwo === "") {
-    operator = evt.target.innerText;
+    operator = event.target.innerText;
   }
   screenDisplay();
   console.log({ calculatorValue, operator, calculatorValueTwo });
 };
 
-const equalsClickHandler = (evt) => {
+const equalsClickHandler = () => {
   const num1 = Number(calculatorValue);
   const num2 = Number(calculatorValueTwo);
   const result = solver;
@@ -78,7 +72,7 @@ const solver = (operator, num1, num2) => {
   }
 };
 
-const clearHandler = (evt) => {
+const clearHandler = () => {
   screen.innerHTML = "0";
   results.innerHTML = "0";
   calculatorValue = "";
@@ -86,7 +80,7 @@ const clearHandler = (evt) => {
   calculatorValueTwo = "";
 };
 
-const backspaceHandler = (evt) => {
+const backspaceHandler = () => {
   if (calculatorValueTwo !== "") {
     calculatorValueTwo = calculatorValueTwo.slice(0, -1);
   } else if (operator !== "") {
@@ -122,7 +116,27 @@ for (const element of buttonList) {
     element.addEventListener("click", backspaceHandler);
   }
   if (plusMinus) {
-    console.log("plusminus");
     element.addEventListener("click", plusMinusOperator);
   }
 }
+
+const keyboard = (event) => {
+  if (!isNaN(event.key)) {
+    calculatorClickHandler({ target: { innerText: event.key } });
+  } else if (
+    event.key === "+" ||
+    event.key === "x" ||
+    event.key === "/" ||
+    event.key === "-"
+  ) {
+    operatorClickHandler({ target: { innerText: event.key } });
+  } else if (event.key === "Enter") {
+    equalsClickHandler({ target: { innerText: event.key } });
+  } else if (event.key === "Backspace") {
+    backspaceHandler({ target: { innerText: event.key } });
+  } else if (event.key === "c") {
+    clearHandler({ target: { innerText: event.key } });
+  }
+};
+
+document.addEventListener("keydown", keyboard);
