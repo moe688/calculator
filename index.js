@@ -98,22 +98,31 @@ const backspaceHandler = (evt) => {
   screenDisplay();
 };
 
+const plusMinusOperator = () => {
+  if (operator === "" && calculatorValueTwo === "") {
+    calculatorValue = calculatorValue * -1;
+  } else if (calculatorValueTwo != "" && operator != "") {
+    calculatorValueTwo = calculatorValueTwo * -1;
+  }
+  screenDisplay();
+};
+
 for (const element of buttonList) {
   const hasNumber = element.className.includes("number");
   const hasOperator = element.className.includes("math");
   const equal = element.className.includes("equals");
   const clear = element.className.includes("clear");
   const backspace = element.className.includes("backspace");
+  const plusMinus = element.className.includes("plusMinus");
   if (hasNumber) element.addEventListener("click", calculatorClickHandler);
   if (hasOperator) element.addEventListener("click", operatorClickHandler);
   if (equal) element.addEventListener("click", equalsClickHandler);
   if (clear) element.addEventListener("click", clearHandler);
   if (backspace) {
-    console.log("backspace");
     element.addEventListener("click", backspaceHandler);
   }
-  // if (clear) {
-  //   console.log("clear");
-  //   element.addEventListener("click", clearHandler);
-  // }
+  if (plusMinus) {
+    console.log("plusminus");
+    element.addEventListener("click", plusMinusOperator);
+  }
 }
