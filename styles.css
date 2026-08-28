@@ -138,12 +138,18 @@ input:checked + .slider:before {
   font-size: 40px;
   color: #4e505f;
   font-weight: 200;
+  width: 100%;
+  overflow-x: auto;
+  text-align: end;
 }
 
 .results {
   font-size: 96px;
   color: white;
   font-weight: 200;
+  width: 100%;
+  overflow-x: auto;
+  text-align: end;
 }
 
 .key {
