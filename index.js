@@ -1,11 +1,12 @@
-const buttonList = document.querySelectorAll(".key");
-console.dir(buttonList);
-
-const k = document.getElementById("calculator");
-console.dir(k);
-
+const buttonList = document.querySelectorAll(".key"); // Loading the DOM (getting all elements that have a .key class)
 const screen = document.querySelector(".equation");
 const results = document.querySelector(".results");
+
+let calculatorValue = "";
+let operator = "";
+let calculatorValueTwo = "";
+
+// ================= ESSENTIAL FUNCTIONS ================= //
 
 const screenDisplay = () => {
   if (operator === "" && calculatorValueTwo === "") {
@@ -17,19 +18,16 @@ const screenDisplay = () => {
   }
 };
 
-let calculatorValue = "";
-let operator = "";
-let calculatorValueTwo = "";
-
 const calculatorClickHandler = (event) => {
   if (operator === "") {
-    const alreadyHasADot = calculatorValue.includes(".");
-    const isDot = event.target.innerText.includes(".");
+    const alreadyHasADot = calculatorValue.includes("."); // if the calculatorVlaue already has a dot.
+    const isDot = event.target.innerText.includes("."); // if the EVENT (the button that was clicked) is a dot.
     const shouldSkip = alreadyHasADot && isDot;
     if (!shouldSkip) {
       calculatorValue += event.target.innerText;
     }
   } else {
+    // here im dictating that if
     const alreadyHasADot = calculatorValueTwo.includes(".");
     const isDot = event.target.innerText.includes(".");
     const shouldSkip = alreadyHasADot && isDot;
@@ -38,7 +36,6 @@ const calculatorClickHandler = (event) => {
     }
   }
   screenDisplay();
-  console.log({ calculatorValue, operator, calculatorValueTwo });
 };
 
 const operatorClickHandler = (event) => {
@@ -46,18 +43,16 @@ const operatorClickHandler = (event) => {
     operator = event.target.innerText;
   }
   screenDisplay();
-  console.log({ calculatorValue, operator, calculatorValueTwo });
 };
 
 const equalsClickHandler = () => {
   const num1 = Number(calculatorValue);
   const num2 = Number(calculatorValueTwo);
-  const result = solver;
 
-  results.innerHTML = solver(operator, num1, num2);
+  results.innerHTML = mathSolver(operator, num1, num2);
 };
 
-const solver = (operator, num1, num2) => {
+const mathSolver = (operator, num1, num2) => {
   switch (operator) {
     case "+":
       return num1 + num2;
@@ -88,7 +83,6 @@ const backspaceHandler = () => {
   } else if (calculatorValue !== "") {
     calculatorValue = calculatorValue.slice(0, -1);
   }
-  console.log({ calculatorValue, operator, calculatorValueTwo });
   screenDisplay();
 };
 
@@ -101,6 +95,8 @@ const plusMinusOperator = () => {
   screenDisplay();
 };
 
+// ================= The Loop where the calculator actually works ================= //
+
 for (const element of buttonList) {
   const hasNumber = element.className.includes("number");
   const hasOperator = element.className.includes("math");
@@ -112,12 +108,8 @@ for (const element of buttonList) {
   if (hasOperator) element.addEventListener("click", operatorClickHandler);
   if (equal) element.addEventListener("click", equalsClickHandler);
   if (clear) element.addEventListener("click", clearHandler);
-  if (backspace) {
-    element.addEventListener("click", backspaceHandler);
-  }
-  if (plusMinus) {
-    element.addEventListener("click", plusMinusOperator);
-  }
+  if (backspace) element.addEventListener("click", backspaceHandler);
+  if (plusMinus) element.addEventListener("click", plusMinusOperator);
 }
 
 const keyboard = (event) => {
