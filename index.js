@@ -1,4 +1,5 @@
 const buttonList = document.querySelectorAll(".key"); // Loading the DOM (getting all elements that have a .key class)
+console.dir(buttonList);
 const screen = document.querySelector(".equation");
 const results = document.querySelector(".results");
 
@@ -9,7 +10,9 @@ let calculatorValueTwo = "";
 // ================= ESSENTIAL FUNCTIONS ================= //
 
 const screenDisplay = () => {
-  if (operator === "" && calculatorValueTwo === "") {
+  if (calculatorValue === "" && operator === "" && calculatorValueTwo === "") {
+    screen.innerHTML = "0";
+  } else if (operator === "" && calculatorValueTwo === "") {
     screen.innerHTML = calculatorValue;
   } else if (operator != "" && calculatorValueTwo === "") {
     screen.innerHTML = calculatorValue + operator;
@@ -25,14 +28,15 @@ const calculatorClickHandler = (event) => {
     const shouldSkip = alreadyHasADot && isDot;
     if (!shouldSkip) {
       calculatorValue += event.target.innerText;
+      backspaceButton.disabled = false;
     }
   } else {
-    // here im dictating that if
     const alreadyHasADot = calculatorValueTwo.includes(".");
     const isDot = event.target.innerText.includes(".");
     const shouldSkip = alreadyHasADot && isDot;
     if (!shouldSkip) {
       calculatorValueTwo += event.target.innerText;
+      equalButton.disabled = false; // pato, ur a good teacher, but i moved this assignment statement instead of keeping it in the operatorClickHandler :P
     }
   }
   screenDisplay();
@@ -67,12 +71,14 @@ const mathSolver = (operator, num1, num2) => {
   }
 };
 
-const clearHandler = () => {
+const clearHandler = (event) => {
   screen.innerHTML = "0";
   results.innerHTML = "0";
   calculatorValue = "";
   operator = "";
   calculatorValueTwo = "";
+  equalButton.disabled = true;
+  backspaceButton.disabled = true; // i also add the disabling statement in the clearHandler so the equal button is disabled again after clearing everything.
 };
 
 const backspaceHandler = () => {
@@ -95,6 +101,11 @@ const plusMinusOperator = () => {
   screenDisplay();
 };
 
+const pointClickHandler = () => {
+  if (calculatorValue === ".") {
+    calculatorValue = "0.";
+  } else if (calculatorValueTwo === ".") calculatorValueTwo = "0.";
+};
 // ================= The Loop where the calculator actually works ================= //
 
 for (const element of buttonList) {
@@ -104,11 +115,21 @@ for (const element of buttonList) {
   const clear = element.className.includes("clear");
   const backspace = element.className.includes("backspace");
   const plusMinus = element.className.includes("plusMinus");
+  const isPoint = element.className.includes("point");
   if (hasNumber) element.addEventListener("click", calculatorClickHandler);
+  if (isPoint) element.addEventListener("click", pointClickHandler);
   if (hasOperator) element.addEventListener("click", operatorClickHandler);
-  if (equal) element.addEventListener("click", equalsClickHandler);
+  if (equal) {
+    element.addEventListener("click", equalsClickHandler);
+    element.disabled = true;
+    equalButton = element;
+  }
   if (clear) element.addEventListener("click", clearHandler);
-  if (backspace) element.addEventListener("click", backspaceHandler);
+  if (backspace) {
+    element.addEventListener("click", backspaceHandler);
+    element.disabled = true;
+    backspaceButton = element;
+  }
   if (plusMinus) element.addEventListener("click", plusMinusOperator);
 }
 

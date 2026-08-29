@@ -204,3 +204,13 @@ input:checked + .slider:before {
   background-color: white;
   border-radius: 100px;
 }
+
+.equals[disabled] {
+  background-color: red;
+  cursor: not-allowed;
+}
+
+.backspace[disabled] {
+  background-color: red;
+  cursor: not-allowed;
+}
