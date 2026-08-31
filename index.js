@@ -3,9 +3,16 @@ console.dir(buttonList);
 const screen = document.querySelector(".equation");
 const results = document.querySelector(".results");
 
+document.addEventListener("keydown", keyboard); // this is an event listener:
+//This tells the browser: watch the whole document,
+// and whenever a key is pressed down, run the keyboard function
+
 let calculatorValue = "";
 let operator = "";
 let calculatorValueTwo = "";
+let equalButton = "";
+let backspaceButton = "";
+let pointButton = "";
 
 // ================= ESSENTIAL FUNCTIONS ================= //
 
@@ -14,9 +21,9 @@ const screenDisplay = () => {
     screen.innerHTML = "0";
   } else if (operator === "" && calculatorValueTwo === "") {
     screen.innerHTML = calculatorValue;
-  } else if (operator != "" && calculatorValueTwo === "") {
+  } else if (operator !== "" && calculatorValueTwo === "") {
     screen.innerHTML = calculatorValue + operator;
-  } else if (calculatorValueTwo != "" && operator != "") {
+  } else if (calculatorValueTwo !== "" && operator !== "") {
     screen.innerHTML = calculatorValue + operator + calculatorValueTwo;
   }
 };
@@ -134,22 +141,18 @@ for (const element of buttonList) {
 }
 
 const keyboard = (event) => {
-  if (!isNaN(event.key)) {
-    calculatorClickHandler({ target: { innerText: event.key } });
-  } else if (
-    event.key === "+" ||
-    event.key === "x" ||
-    event.key === "/" ||
-    event.key === "-"
+  if (
+    !isNaN(event.key) || //checks if event key (the key that was pressed, which was listened to throught the listener in line 6)
+    ["*", "+", "-", "/", "c"].includes(event.key) // or they key belongs to this array
   ) {
-    operatorClickHandler({ target: { innerText: event.key } });
+    const button = [...buttonList].find(
+      // we convert buttonList "a nodeList" to an array to able to use find()
+      (button) => button.innerText === event.key,
+    );
+    button?.click(); // optional operator.. If button is undefined (no match found), it just skips calling .click() instead of throwing an error.
   } else if (event.key === "Enter") {
-    equalsClickHandler({ target: { innerText: event.key } });
+    equalButton.click();
   } else if (event.key === "Backspace") {
-    backspaceHandler({ target: { innerText: event.key } });
-  } else if (event.key === "c") {
-    clearHandler({ target: { innerText: event.key } });
+    backspaceButton.click();
   }
 };
-
-document.addEventListener("keydown", keyboard);
