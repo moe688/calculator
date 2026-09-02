@@ -6,11 +6,22 @@ const results = document.querySelector(".results");
 let calculatorValue = "";
 let operator = "";
 let calculatorValueTwo = "";
+let previousCalculatorValue = "";
+let previousOperator = "";
+let previousCalculatorValueTwo = "";
+let justCalculated = false;
 
 // ================= ESSENTIAL FUNCTIONS ================= //
 
 const screenDisplay = () => {
-  if (calculatorValue === "" && operator === "" && calculatorValueTwo === "") {
+  if (justCalculated) {
+    screen.innerHTML =
+      previousCalculatorValue + previousOperator + previousCalculatorValueTwo;
+  } else if (
+    calculatorValue === "" &&
+    operator === "" &&
+    calculatorValueTwo === ""
+  ) {
     screen.innerHTML = "0";
   } else if (operator === "" && calculatorValueTwo === "") {
     screen.innerHTML = calculatorValue;
@@ -23,6 +34,10 @@ const screenDisplay = () => {
 
 const calculatorClickHandler = (event) => {
   if (operator === "") {
+    if (justCalculated) {
+      calculatorValue = "";
+      justCalculated = false;
+    }
     const alreadyHasADot = calculatorValue.includes("."); // if the calculatorVlaue already has a dot.
     const isDot = event.target.innerText.includes("."); // if the EVENT (the button that was clicked) is a dot.
     const shouldSkip = alreadyHasADot && isDot;
@@ -45,6 +60,7 @@ const calculatorClickHandler = (event) => {
 const operatorClickHandler = (event) => {
   if (calculatorValueTwo === "") {
     operator = event.target.innerText;
+    justCalculated = false;
   }
   screenDisplay();
 };
@@ -53,7 +69,15 @@ const equalsClickHandler = () => {
   const num1 = Number(calculatorValue);
   const num2 = Number(calculatorValueTwo);
 
-  results.innerHTML = mathSolver(operator, num1, num2);
+  justCalculated = true;
+  previousCalculatorValue = calculatorValue;
+  previousOperator = operator;
+  previousCalculatorValueTwo = calculatorValueTwo;
+  calculatorValue = mathSolver(operator, num1, num2);
+  results.innerHTML = calculatorValue;
+  operator = "";
+  calculatorValueTwo = "";
+  screenDisplay();
 };
 
 const mathSolver = (operator, num1, num2) => {
@@ -64,14 +88,14 @@ const mathSolver = (operator, num1, num2) => {
       return num1 - num2;
     case "x":
       return num1 * num2;
-    case "/":
+    case "÷":
       return num1 / num2;
     default:
       return "";
   }
 };
 
-const clearHandler = (event) => {
+const clearHandler = () => {
   screen.innerHTML = "0";
   results.innerHTML = "0";
   calculatorValue = "";
